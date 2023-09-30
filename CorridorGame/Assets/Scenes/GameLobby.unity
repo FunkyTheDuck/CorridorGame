@@ -884,6 +884,36 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: DistantPoliceSiren
+    clip: {fileID: 8300000, guid: bf54d95c42e17e640a9a01d9202e4d38, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GirlCrying
+    clip: {fileID: 8300000, guid: b280065578c408b488998077c298b1c6, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GameEndMusic
+    clip: {fileID: 8300000, guid: 8388719249975614eb0d83484e03c9eb, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: WoodenFloorCracking
+    clip: {fileID: 8300000, guid: d06af244918090a43b0bd049ee163139, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: HeartBeat
+    clip: {fileID: 8300000, guid: 4de08d11b8d27e646a0a2f582ef21fba, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!1 &979213073
 GameObject:
   m_ObjectHideFlags: 0
@@ -1487,6 +1517,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2138635802}
   m_CullTransparentMesh: 1
+--- !u!1001 &1232350616495730054
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 627499880329299292, guid: cde21ea232530b140949b1f9d9e0a590, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 627499880329299292, guid: cde21ea232530b140949b1f9d9e0a590, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 627499880329299292, guid: cde21ea232530b140949b1f9d9e0a590, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 627499880329299292, guid: cde21ea232530b140949b1f9d9e0a590, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 627499880329299292, guid: cde21ea232530b140949b1f9d9e0a590, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 627499880329299292, guid: cde21ea232530b140949b1f9d9e0a590, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 627499880329299292, guid: cde21ea232530b140949b1f9d9e0a590, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 627499880329299292, guid: cde21ea232530b140949b1f9d9e0a590, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 627499880329299292, guid: cde21ea232530b140949b1f9d9e0a590, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 627499880329299292, guid: cde21ea232530b140949b1f9d9e0a590, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 736576185134033535, guid: cde21ea232530b140949b1f9d9e0a590, type: 3}
+      propertyPath: m_Name
+      value: Corridor
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cde21ea232530b140949b1f9d9e0a590, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1496,3 +1583,4 @@ SceneRoots:
   - {fileID: 830185980}
   - {fileID: 94009244}
   - {fileID: 1911001521}
+  - {fileID: 1232350616495730054}

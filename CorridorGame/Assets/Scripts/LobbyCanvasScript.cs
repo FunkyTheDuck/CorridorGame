@@ -7,9 +7,8 @@ public class LobbyCanvasScript : MonoBehaviour
 {
     void Start()
     {
-        GameObject.Find("SoundManager").GetComponent<SoundManager>().PlayASound("LobbyMusic");
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().PlayASound("LobbyMusic", false);
     }
-
     public void StartGame()
     {
         GameObject.Find("SoundManager").GetComponent<SoundManager>().StopAllSounds();
