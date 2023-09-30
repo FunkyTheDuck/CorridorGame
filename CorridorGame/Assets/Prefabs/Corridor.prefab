@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 627499880329299292}
   - component: {fileID: 2930073846534752955}
+  - component: {fileID: 1625471078338439896}
   m_Layer: 0
   m_Name: Corridor
   m_TagString: Floor
@@ -27,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.10941899, y: 0.10941899, z: 0.10941899}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5189102107982615206}
@@ -76,6 +77,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1625471078338439896
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736576185134033535}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 1
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5409227736988464194, guid: 7a5d6526d23380d4d824723b90cb4e80, type: 3}
 --- !u!1 &4441978486754423959
 GameObject:
   m_ObjectHideFlags: 0

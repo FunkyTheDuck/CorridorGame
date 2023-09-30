@@ -27,39 +27,87 @@ public class SpawnCorridor : MonoBehaviour
     }
     public void CreatePrefab()
     {
-        float radius = Corridor.GetComponent<MeshRenderer>().bounds.size.x/2;
+        float radius = Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.z / 4;
 
-        
+        //Debug.Log(Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.z / 2);
+
         AllCorridor = GameObject.FindGameObjectsWithTag("Floor");
-        if (AllCorridor.Length < 10)
+        sizeX = Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.x;
+        sizeZ = Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.z;
+        //CheckPos.x = sizeX * i;
+        Vector3 CheckPosPlusZ = Player.transform.position;
+        CheckPosPlusZ.z += sizeZ;
+        if (!Physics.CheckSphere(CheckPosPlusZ, radius))
         {
-            for (int i = 0; i < 6; i++)
+            float FurthestDistance = 0;
+            GameObject furthestObject = null;
+            foreach (GameObject Object in AllCorridor)
             {
-                Vector3 CheckPos = Player.transform.position;
-                sizeX = Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.x;
-                sizeZ = Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.z;
-                //CheckPos.x = sizeX * i;
-                CheckPos.z += sizeZ * i;
-                if (!Physics.CheckSphere(CheckPos, radius))
+                if (Object.transform.position.z > Player.transform.position.z || AllCorridor.Length < 3)
                 {
-                    Instantiate(Corridor, new Vector3(0, 0, CheckPos.z), Quaternion.identity);
+                    float ObjectDistance = Vector3.Distance(Player.transform.position, Object.transform.position);
+
+                    if (ObjectDistance > FurthestDistance)
+                    {
+                        furthestObject = Object;
+                        FurthestDistance = ObjectDistance;
+                    }
                 }
             }
-            //for (int i = 0; i < 6; i++)
-            //{
-            //    Vector3 CheckPos = Player.transform.position;
-            //    sizeX = Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.x;
-            //    sizeZ = Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.z;
-            //    //CheckPos.x = sizeX * i;
-            //    CheckPos.z += sizeZ * -i;
-            //    if (!Physics.CheckSphere(CheckPos, radius))
-            //    {
-            //        Instantiate(Corridor, new Vector3(0, 0, CheckPos.z), Quaternion.identity);
-            //    }
-            //}
-
+            Debug.Log(furthestObject.transform.position.z);
+            Instantiate(Corridor, new Vector3(0, 0, furthestObject.transform.position.z + Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.z), Quaternion.identity);
         }
-        
+        Vector3 CheckPosMinusZ = Player.transform.position;
+        CheckPosMinusZ.z -= sizeZ;
+        if (!Physics.CheckSphere(CheckPosMinusZ, radius))
+        {
+            float FurthestDistance = 0;
+            GameObject furthestObject = null;
+            foreach (GameObject Object in AllCorridor)
+            {
+                if (Object.transform.position.z < Player.transform.position.z || AllCorridor.Length < 3)
+                {
+                    float ObjectDistance = Vector3.Distance(Player.transform.position, Object.transform.position);
+
+                    if (ObjectDistance > FurthestDistance)
+                    {
+                        furthestObject = Object;
+                        FurthestDistance = ObjectDistance;
+                    }
+                }
+            }
+            Debug.Log(furthestObject.transform.position.z);
+            Instantiate(Corridor, new Vector3(0, 0, furthestObject.transform.position.z - Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.z), Quaternion.identity);
+        }
+        //if (AllCorridor.Length < 10)
+        //{
+        //    //for (int i = 0; i < 6; i++)
+        //    //{
+        //    //    Vector3 CheckPos = Player.transform.position;
+        //    //    sizeX = Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.x;
+        //    //    sizeZ = Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.z;
+        //    //    //CheckPos.x = sizeX * i;
+        //    //    CheckPos.z += sizeZ * i;
+        //    //    if (!Physics.CheckSphere(CheckPos, radius))
+        //    //    {
+        //    //        Instantiate(Corridor, new Vector3(0, 0, CheckPos.z), Quaternion.identity);
+        //    //    }
+        //    //}
+        //    //for (int i = 0; i < 6; i++)
+        //    //{
+        //    //    Vector3 CheckPos = Player.transform.position;
+        //    //    sizeX = Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.x;
+        //    //    sizeZ = Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.z;
+        //    //    //CheckPos.x = sizeX * i;
+        //    //    CheckPos.z += sizeZ * -i;
+        //    //    if (!Physics.CheckSphere(CheckPos, radius))
+        //    //    {
+        //    //        Instantiate(Corridor, new Vector3(0, 0, CheckPos.z), Quaternion.identity);
+        //    //    }
+        //    //}
+
+        //}
+
 
         //if (AllCorridor.Length < 5) 
         //{
