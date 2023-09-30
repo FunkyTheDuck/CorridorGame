@@ -41,7 +41,7 @@ public class SpawnCorridor : MonoBehaviour
                 playerPos.z = (gridZ + j - 2) * 10;
                 if (!Physics.CheckSphere(playerPos, radius))
                 {
-                    newInstance = Instantiate(Corridor, new Vector3(playerPos.x, 0, playerPos.z), Player.transform.rotation);
+                    newInstance = Instantiate(Corridor, new Vector3(playerPos.x, 0, playerPos.z), Quaternion.identity);
                 }
             }
         }
