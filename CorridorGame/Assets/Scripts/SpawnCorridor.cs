@@ -36,7 +36,7 @@ public class SpawnCorridor : MonoBehaviour
         sizeZ = Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.z;
         //CheckPos.x = sizeX * i;
         Vector3 CheckPosPlusZ = Player.transform.position;
-        CheckPosPlusZ.z += sizeZ;
+        CheckPosPlusZ.z += sizeZ * 3;
         if (!Physics.CheckSphere(CheckPosPlusZ, radius))
         {
             float FurthestDistance = 0;
@@ -58,7 +58,7 @@ public class SpawnCorridor : MonoBehaviour
             Instantiate(Corridor, new Vector3(0, 0, furthestObject.transform.position.z + Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.z), Quaternion.identity);
         }
         Vector3 CheckPosMinusZ = Player.transform.position;
-        CheckPosMinusZ.z -= sizeZ;
+        CheckPosMinusZ.z -= sizeZ * 3;
         if (!Physics.CheckSphere(CheckPosMinusZ, radius))
         {
             float FurthestDistance = 0;
@@ -161,7 +161,7 @@ public class SpawnCorridor : MonoBehaviour
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Floor");
         foreach (GameObject gameObject in gameObjects)
         {
-            if (Vector3.Distance(gameObject.transform.position, Player.transform.position) > 30 * Corridor.transform.localScale.x) 
+            if (Vector3.Distance(gameObject.transform.position, Player.transform.position) > 50 * Corridor.transform.localScale.x) 
             {
                 
                 Destroy(gameObject);
