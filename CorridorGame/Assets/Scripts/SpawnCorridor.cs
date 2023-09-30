@@ -1,16 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.TerrainUtils;
 
 public class SpawnCorridor : MonoBehaviour
 {
     public GameObject Corridor;
     public GameObject Player;
-    private GameObject newInstance;
+    private GameObject[] AllCorridor;
+    float oldScale = 1f;
+    float sizeX;
+    float sizeZ;
     // Start is called before the first frame update
     void Start()
     {
-        
+        Instantiate(Corridor, new Vector3(0, 0, 0), Quaternion.identity);
+        Debug.Log(Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size);
     }
 
     // Update is called once per frame
@@ -18,44 +24,88 @@ public class SpawnCorridor : MonoBehaviour
     {
         CreatePrefab();
         DestroyPrefab();
-        //if (distance > 10)
-        //{
-        //    Destroy(newInstance);
-        //    Debug.Log("Something Destroyed1");
-        //}
     }
     public void CreatePrefab()
     {
-        float radius = 2f;
+        float radius = Corridor.GetComponent<MeshRenderer>().bounds.size.x/2;
 
-        for (int i = 0; i < 5; i++) 
+        
+        AllCorridor = GameObject.FindGameObjectsWithTag("Floor");
+        if (AllCorridor.Length < 10)
         {
-            for (int j = 0; j < 5; j++)
+            for (int i = 0; i < 6; i++)
             {
-                Vector3 playerPos = Player.transform.position;
-                float gridX = playerPos.x / 10;
-                float gridZ = playerPos.z / 10;
-                gridX = Mathf.RoundToInt(gridX);
-                gridZ = Mathf.RoundToInt(gridZ);
-                playerPos.x = (gridX + i - 2) * 10;
-                playerPos.z = (gridZ + j - 2) * 10;
-                if (!Physics.CheckSphere(playerPos, radius))
+                Vector3 CheckPos = Player.transform.position;
+                sizeX = Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.x;
+                sizeZ = Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.z;
+                //CheckPos.x = sizeX * i;
+                CheckPos.z += sizeZ * i;
+                if (!Physics.CheckSphere(CheckPos, radius))
                 {
-                    newInstance = Instantiate(Corridor, new Vector3(playerPos.x, 0, playerPos.z), Quaternion.identity);
+                    Instantiate(Corridor, new Vector3(0, 0, CheckPos.z), Quaternion.identity);
                 }
             }
+            //for (int i = 0; i < 6; i++)
+            //{
+            //    Vector3 CheckPos = Player.transform.position;
+            //    sizeX = Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.x;
+            //    sizeZ = Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.z;
+            //    //CheckPos.x = sizeX * i;
+            //    CheckPos.z += sizeZ * -i;
+            //    if (!Physics.CheckSphere(CheckPos, radius))
+            //    {
+            //        Instantiate(Corridor, new Vector3(0, 0, CheckPos.z), Quaternion.identity);
+            //    }
+            //}
+
         }
+        
 
-
-        //float distance = Vector3.Distance(Player.transform.position, Corridor.transform.position);
-        //Debug.Log(Corridor.transform.position);
-        //if (distance > 4)
+        //if (AllCorridor.Length < 5) 
         //{
-            
-        //    playerPos.y -= 1;
+        //    Vector3 CheckPos = Player.transform.position;
+        //    sizeX = Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.x;
+        //    sizeZ = Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.z;
+        //    CheckPos.x = CheckPos.x + (sizeX * 2);
+        //    CheckPos.z = CheckPos.z + (sizeZ * 2);
+        //    if (!Physics.CheckSphere(CheckPos, radius))
+        //    {
+        //        Instantiate(Corridor, new Vector3(CheckPos.x, 0, CheckPos.z), Quaternion.identity);
+        //    }
+        //}
 
-        //    newInstance = Instantiate(Corridor, playerPos, Player.transform.rotation);
-        //    Corridor.transform.position = newInstance.transform.position;
+        //GameObject currentCorridor = null;
+
+        //foreach (var corridors in allCorridor)
+        //{
+        //    float afstand = Vector3.Distance(corridors.transform.position, Player.transform.position);
+        //    if (afstand < Corridor.GetComponent<MeshRenderer>().bounds.size.x)
+        //    {
+        //        currentCorridor = corridors;
+        //    }
+        //}
+
+        //Instantiate(Corridor, new Vector3(currentCorridor.transform.position.x + 1, currentCorridor.transform.position.y + currentCorridor.GetComponent<MeshRenderer>().bounds.size.y, currentCorridor.transform.position.z + currentCorridor.GetComponent<MeshRenderer>().bounds.size.z), Quaternion.identity);
+
+
+
+
+
+
+        //for (int i = 0; i < 5; i++) 
+        //{
+        //    for (int j = 0; j < 5; j++)
+        //    {
+        //        Vector3 CheckPos = Player.transform.position;
+        //        sizeX = Corridor.GetComponent<MeshRenderer>().bounds.size.x;
+        //        sizeZ = Corridor.GetComponent<MeshRenderer>().bounds.size.z;
+        //        CheckPos.x = CheckPos.x + (sizeX * (i - 2));
+        //        CheckPos.z = CheckPos.z + (sizeX * (j - 2));
+        //        if (!Physics.CheckSphere(CheckPos, radius))
+        //        {
+        //            newInstance = Instantiate(Corridor, new Vector3(CheckPos.x, 0, CheckPos.z), Quaternion.identity);
+        //        }
+        //    }
         //}
     }
     public void DestroyPrefab()
@@ -63,8 +113,9 @@ public class SpawnCorridor : MonoBehaviour
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Floor");
         foreach (GameObject gameObject in gameObjects)
         {
-            if (Vector3.Distance(gameObject.transform.position, Player.transform.position) > 30) 
+            if (Vector3.Distance(gameObject.transform.position, Player.transform.position) > 30 * Corridor.transform.localScale.x) 
             {
+                
                 Destroy(gameObject);
             }
         }
