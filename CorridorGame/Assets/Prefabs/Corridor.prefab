@@ -1026,6 +1026,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 627499880329299292}
     m_Modifications:
+    - target: {fileID: 199707647260599214, guid: a147a3318be52bb4280a535a0e79ffbf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2572469238120617127, guid: a147a3318be52bb4280a535a0e79ffbf, type: 3}
       propertyPath: m_Name
       value: CeilingLamp
@@ -1083,12 +1087,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6426210024250451752, guid: a147a3318be52bb4280a535a0e79ffbf, type: 3}
+      propertyPath: m_Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6426210024250451752, guid: a147a3318be52bb4280a535a0e79ffbf, type: 3}
       propertyPath: m_Range
-      value: 7.8
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6426210024250451752, guid: a147a3318be52bb4280a535a0e79ffbf, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 6426210024250451752, guid: a147a3318be52bb4280a535a0e79ffbf, type: 3}
       propertyPath: m_Lightmapping
