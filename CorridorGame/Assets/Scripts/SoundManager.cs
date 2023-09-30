@@ -25,12 +25,17 @@ public class SoundManager : MonoBehaviour
             sounds[i].source.Stop();
         }
     }
-    public void PlayASound(string name)
+    public void PlayASound(string name, bool is3D)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if(s != null)
         {
+            if(is3D)
+            {
+                s.source.spatialBlend = 1;
+            }
             s.source.Play();
+
         }
         else
         {
