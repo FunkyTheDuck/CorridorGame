@@ -35,20 +35,22 @@ public class Scaling : MonoBehaviour
     }
     public void ScalingGround()
     {
-        Corridor.transform.localScale -= new Vector3(Corridor.transform.localScale.x * ScaleAmount, 0, Corridor.transform.localScale.z * ScaleAmount);
+        Vector3 oldScale = Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size;
+        Corridor.transform.localScale -= new Vector3(Corridor.transform.localScale.x * ScaleAmount, Corridor.transform.localScale.y * ScaleAmount, Corridor.transform.localScale.z * ScaleAmount);
         GameObject[] test = GameObject.FindGameObjectsWithTag("Floor");
         foreach (GameObject test2 in test)
         {
-            Vector3 oldScale = test2.GetComponent<MeshRenderer>().bounds.size;
-            test2.transform.localScale -= new Vector3(test2.transform.localScale.x * ScaleAmount, 0, test2.transform.localScale.z * ScaleAmount);
-            float talX = (test2.transform.position.x - Player.transform.position.x) / test2.GetComponent<MeshRenderer>().bounds.size.x;
+            test2.transform.position = new Vector3(test2.transform.position.x, 0, test2.transform.position.z);
+            test2.transform.localScale -= new Vector3(test2.transform.localScale.x * ScaleAmount, test2.transform.localScale.y * ScaleAmount, test2.transform.localScale.z * ScaleAmount);
+            float talX = (test2.transform.position.x - Player.transform.position.x) / Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.x;
             int tal2X = Mathf.RoundToInt(talX);
-            Debug.Log(tal2X);
-            test2.transform.position -= new Vector3((oldScale.x - test2.GetComponent<MeshRenderer>().bounds.size.x) * tal2X, 0, 0);
-            float talZ = (test2.transform.position.z - Player.transform.position.z) / test2.GetComponent<MeshRenderer>().bounds.size.z;
+            test2.transform.position -= new Vector3((oldScale.x - Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.x) * tal2X, 0, 0);
+            float talZ = (test2.transform.position.z - Player.transform.position.z) / Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.z;
             int tal2Z = Mathf.RoundToInt(talZ);
-            Debug.Log(tal2Z);
-            test2.transform.position -= new Vector3(0, 0, (oldScale.z - test2.GetComponent<MeshRenderer>().bounds.size.z) * tal2Z);
+            test2.transform.position -= new Vector3(0, 0, (oldScale.z - Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.z) * tal2Z);
+            float talY = (test2.transform.position.y - Player.transform.position.y) / Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.y;
+            int tal2Y = Mathf.RoundToInt(talY);
+            test2.transform.position -= new Vector3(0, (oldScale.y - Corridor.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().bounds.size.y) * tal2Y, 0);
             //if (test2.transform.position.x < Player.transform.position.x)
             //{
             //    test2.transform.position = new Vector3(test2.transform.position.x / oldScale.x, 0, test2.transform.position.z); 
