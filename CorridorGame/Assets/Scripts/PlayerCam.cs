@@ -12,6 +12,9 @@ public class PlayerCam : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        float[] distance = new float[32];
+        distance[10] = 2;
+        gameObject.GetComponent<Camera>().layerCullDistances = distance;
     }
     private void Update()
     {
