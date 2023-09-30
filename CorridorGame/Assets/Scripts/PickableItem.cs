@@ -11,6 +11,15 @@ public class PickableItem : MonoBehaviour
         Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
         if(Input.GetKeyDown(KeyCode.E))
         {
+            Debug.Log("Pressed E");
+            if(gameObject.name.Contains("Door"))
+            {
+                Debug.Log("Play door sound");
+                GameObject soundManager = GameObject.Find("SoundManager");
+                soundManager.transform.position = gameObject.transform.position;
+                soundManager.GetComponent<SoundManager>().PlayASound("DoorLocked", true);
+                return;
+            }
             Debug.Log("You've picked up an item");
             Cursor.visible = false;
             Destroy(gameObject);
