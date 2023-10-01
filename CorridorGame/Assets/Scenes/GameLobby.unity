@@ -832,6 +832,12 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: AmbientSound
+    clip: {fileID: 8300000, guid: bbf065d56f5d99141971064e1d2071cd, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
 --- !u!1 &979213073
 GameObject:
   m_ObjectHideFlags: 0
