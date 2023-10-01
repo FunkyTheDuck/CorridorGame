@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
         soundManager.PlayASound("AmbientSound",false);
         player = GameObject.Find("Player");
         StartCoroutine(FloorCraking(Random.Range(5,17)));
+        //gameCanvas.StartDying();
     }
     IEnumerator FloorCraking(int seconds)
     {
@@ -73,10 +74,28 @@ public class GameManager : MonoBehaviour
     public void SetHeardCrying(bool value)
     {
         heardCrying = value;
+        if(value)
+        {
+            StartCoroutine(ResetCrying());
+        }
     }
     public void SetHeardSiren(bool value)
     {
         heardSiren = value;
+        if (value)
+        {
+            StartCoroutine(ResetSiren());
+        }
+    }
+    IEnumerator ResetCrying()
+    {
+        yield return new WaitForSeconds(100);
+        SetHeardCrying(false);
+    }
+    IEnumerator ResetSiren()
+    {
+        yield return new WaitForSeconds(100);
+        SetHeardSiren(false);
     }
     #endregion
 }

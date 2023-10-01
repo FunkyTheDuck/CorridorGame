@@ -42,4 +42,16 @@ public class SoundManager : MonoBehaviour
             Debug.Log("Sound with name: " + name + " doesn't exist");
         }
     }
+    public void StopASound(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if(s != null)
+        {
+            s.source.Stop();
+        }
+        else
+        {
+            Debug.Log("Sound with name: " + name + " doesn't exist");
+        }
+    }
 }
