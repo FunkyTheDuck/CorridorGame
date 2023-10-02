@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
         {
 
         }
+        Cursor.visible = false;
         gameCanvas = GameObject.Find("GameUI").GetComponent<GameCanvasScript>();
         soundManager.PlayASound("AmbientSound",false);
         player = GameObject.Find("Player");

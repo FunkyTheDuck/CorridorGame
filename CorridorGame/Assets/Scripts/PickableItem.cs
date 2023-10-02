@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PickableItem : MonoBehaviour
 {
@@ -8,11 +9,22 @@ public class PickableItem : MonoBehaviour
     GameManager myGM;
     private void Start()
     {
-         myGM = GameObject.Find("GameManager").GetComponent<GameManager>();
+        try
+        {
+            myGM = GameObject.Find("GameManager").GetComponent<GameManager>();
+        }
+        catch
+        {
+
+        }
     }
 
     private void OnMouseOver()
     {
+        if(SceneManager.GetActiveScene().name == "GameLobby")
+        {
+            return;
+        }
         if (Vector3.Distance(transform.GetChild(0).position, myGM.player.transform.position) > 3)
         {
             return;

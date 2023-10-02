@@ -1,20 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
 public class GameCanvasScript : MonoBehaviour
 {
-    private GameObject NoteReader;
+    public GameObject NoteReader;
     public GameObject DeathScreen;
     public GameObject YouDiedScreen;
     float alpha;
     bool displayingNote;
-    private void Start()
+    private void Update()
     {
-        NoteReader = GameObject.Find("NoteReader");
-        NoteReader.SetActive(false);
+        if(YouDiedScreen.activeInHierarchy)
+        {
+            Cursor.visible = true;
+        }
+        if (displayingNote)
+        {
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                NoteReader.SetActive(false);
+            }
+        }
     }
     public void DisplayNote(string text)
     {
@@ -39,6 +49,8 @@ public class GameCanvasScript : MonoBehaviour
         {
             Debug.Log("You died");
             YouDiedScreen.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             GameObject.Find("SoundManager").GetComponent<SoundManager>().StopASound("HeavyBreating");
             GameObject.Find("SoundManager").GetComponent<SoundManager>().PlayASound("DemonSound",false);
         }
@@ -47,14 +59,16 @@ public class GameCanvasScript : MonoBehaviour
             StartCoroutine(IncreseImageAlpha());
         }
     }
-    private void Update()
+    public void PlayAgain()
     {
-        if(displayingNote)
-        {
-            if(Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                NoteReader.SetActive(false);
-            }
-        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void GoBack()
+    {
+        SceneManager.LoadScene("GameLobby");
+    }
+    public void Quit()
+    {
+        Application.Quit();
     }
 }
